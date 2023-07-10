@@ -3,7 +3,7 @@ Inspired by and adapted from [the Coding Train video on Wave Function Collapse](
 
 More information about the Wave Function Collapse algorithm can be [found here](https://github.com/mxgmn/WaveFunctionCollapse) in the repository of the person who I believe pioneered this algorithm in the context of generative graphics.
 
-This sketch uses a default style for the generated tiles. They are maze-like although no care is taken to ensure a valid or even sensible maze is created, it is simply generating a 2D texture. 
+This sketch uses a default style for the generated tiles. They are maze-like although no care is taken to ensure a valid or even sensible maze is created, it is simply generating a 2D texture.
 
 The sketch can be adapted to use any set of tiles as follows:
   1.  **Draw the tiles**. The program has so far only been tested with tiles of 100px by 100px dimensions but should, in theory work with any size. Note that it is recommended that you draw enough tiles to prevent a condition where there is no valid tile for a paritcular configuration. There is currently no backtracking in the algorithm, and while this is planned, the program will halt if it cannot find a tile that satisfies its environment.
@@ -21,9 +21,15 @@ The sketch can be adapted to use any set of tiles as follows:
 You can find examples of these files in the sprites directory
 
 ## Known bugs
-None that I know of. Feel free to open an issue. 
+None that I know of. Feel free to open an issue.
 
-## Future Plans 
+## Future Plans
+ - [x]  If many cells tie for least entropy choose a random one rather than the first one every time
+ - [x]  Precompute entropy for every cell once, then only recompute for the neighbors of the cell and the new cell
  - [ ]  Implement backtracking
- - [ ]  Allow live selection of tile sets 
+ - [ ]  Allow live selection of tile sets
+ - [ ]  Determine rotational variants using rotation and the data provided in the `schema.json` file so rotated versions of tiles are not needed if possible
+ - [ ]  Ditto for flipping if possible
+ - [ ]  Currently matching is completely binary you can only match or not match at a particular side. I would like to make it so that some times can match with other tiles but not all tiles on a particular side
+ - [ ]  Possibly implement a socket style of matching
  - [ ]  Determine possible connections using image processing obviating the need for the `tiles` part of the `schema.json`
