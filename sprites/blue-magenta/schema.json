@@ -1,0 +1,72 @@
+{
+  "global": {
+    "width": 100,
+    "height": 100,
+    "count": 10
+  },
+  "images": {
+    "1.png": {
+      "connects_on": []
+    },
+    "2.png": {
+      "connects_on": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "3.png": {
+      "connects_on": [
+        2,
+        4,
+        8
+      ]
+    },
+    "4.png": {
+      "connects_on": [
+        1,
+        4,
+        8
+      ]
+    },
+    "5.png": {
+      "connects_on": [
+        1,
+        2,
+        4
+      ]
+    },
+    "6.png": {
+      "connects_on": [
+        1,
+        2
+      ]
+    },
+    "7.png": {
+      "connects_on": [
+        1,
+        2,
+        8
+      ]
+    },
+    "8.png": {
+      "connects_on": [
+        2,
+        4
+      ]
+    },
+    "9.png": {
+      "connects_on": [
+        1,
+        8
+      ]
+    },
+    "10.png": {
+      "connects_on": [
+        4,
+        8
+      ]
+    }
+  }
+}
