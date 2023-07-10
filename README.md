@@ -15,8 +15,8 @@ The sketch can be adapted to use any set of tiles as follows:
   5.  The `schema.json` file for a set of tiles has the following structure:
   6.  A `global` key containing the width and height of each tile and how many there are (currently all unused fields)
   7.  A `tiles` key which keys an object of the following structure
-  8.  | The keys of this object are the names of the tile image files on disk
-  9.  | The values of these keys are also objects which contain a single `connects_on` key which is a list of 1, 2, 4, or 8 corresponding to *tile in the file* being able to connect **on it's own** top, right, bottom, or left respectively.
+      -  The keys of this object are the names of the tile image files on disk
+      - The values of these keys are also objects which contain a single `connects_on` key which is a list of 1, 2, 4, or 8 corresponding to *tile in the file* being able to connect **on it's own** top, right, bottom, or left respectively.
 
 You can find examples of these files in the sprites directory
 
