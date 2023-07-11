@@ -24,11 +24,11 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  board = new Board(100);
+  board = new Board(40);
 
   withStroke = createCheckbox('Outlines?');
   debugging = createCheckbox('Debug?');
-  debugging.checked(true);
+  // debugging.checked(true);
 }
 
 function draw() {
