@@ -64,7 +64,7 @@ class Board {
     return count;
   }
 
-  superposition_at(i, j) {
+  superpositionAt(i, j) {
     return this._gatherOptions(i, j).options;
   }
 
@@ -86,9 +86,11 @@ class Board {
   step() {
     let nextCandidate = board.leastEntropy();
     if (nextCandidate) {
-      let sprites = board.superposition_at(nextCandidate.col, nextCandidate.row);
-      board.grid[nextCandidate.col][nextCandidate.row].sprite = random(sprites);
-      this.updateNeighborEntropy(nextCandidate.col, nextCandidate.row);
+      let sprites = board.superpositionAt(nextCandidate.col, nextCandidate.row);
+      if (sprites.length) {
+        board.grid[nextCandidate.col][nextCandidate.row].setSprite(random(sprites));
+        this.updateNeighborEntropy(nextCandidate.col, nextCandidate.row);
+      }
     }
   }
 

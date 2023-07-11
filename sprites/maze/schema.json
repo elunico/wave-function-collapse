@@ -2,44 +2,41 @@
   "global": {
     "width": 100,
     "height": 100,
-    "count": 8
+    "count": 3
   },
   "images": {
     "1.png": {
-      "connects_on": [
-        2,
-        8
-      ]
-    },
-    "2.png": {
-      "connects_on": [
-        1,
-        4
+      "classes": {
+        "1": "A",
+        "2": "B",
+        "4": "A",
+        "8": "B"
+      },
+      "rotates": [
+        90
       ]
     },
     "3.png": {
-      "connects_on": [
-        4,
-        8
+      "classes": {
+        "1": "A",
+        "2": "A",
+        "4": "B",
+        "8": "B"
+      },
+      "rotates": [
+        90,
+        180,
+        270
       ]
     },
-    "4.png": {
-      "connects_on": [
-        1,
-        8
-      ]
-    },
-    "5.png": {
-      "connects_on": [
-        1,
-        2
-      ]
-    },
-    "6.png": {
-      "connects_on": [
-        2,
-        4
-      ]
+    "8.png": {
+      "classes": {
+        "1": "A",
+        "2": "A",
+        "4": "A",
+        "8": "A"
+      },
+      "rotates": []
     }
   }
 }
