@@ -19,12 +19,12 @@ let withStroke;
 let debugging;
 
 function preload() {
-  Sprite.loadSprites('advanced-maze');
+  Sprite.loadSprites('advanced-maze', sprites);
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  board = new Board(40);
+  board = new Board(30);
 
   withStroke = createCheckbox('Outlines?');
   debugging = createCheckbox('Debug?');
@@ -59,9 +59,15 @@ function draw() {
     for (let i = 0; i < board.columns; i++) {
       for (let j = 0; j < board.rows; j++) {
         let cell = board.grid[i][j];
+        let rcount = board.cache[Board.key(i, j)].count;
+        let x = i * board.resolution;
+        let y = j * board.resolution;
+        if (rcount == 0) {
+          fill(255, 0, 0, 75);
+          noStroke();
+          rect(x, y, board.resolution, board.resolution);
+        }
         if (cell.sprite != -1 && cell.sprite) {
-          let x = i * board.resolution;
-          let y = j * board.resolution;
           if (mouseX > x && mouseX < x + board.resolution && mouseY > y && mouseY < y + board.resolution) {
             fill(255, 100);
             rect(x, y, board.resolution, board.resolution);
@@ -69,8 +75,8 @@ function draw() {
             stroke(255);
             let br = board.resolution / 2;
             textAlign(CENTER, CENTER);
-            // circle(x + br, y + br, br);
             text(cell.sprite.filename, x + br, y + br - 15);
+            text(`${i}, ${j}`, x + br, y + br);
             if (cell.sprite.positions[TOP]) {
               text(TOP, x + br, y);
               text(cell.sprite.positions[TOP], x + br, y + 15);
@@ -78,7 +84,6 @@ function draw() {
             if (cell.sprite.positions[BOTTOM]) {
               text(BOTTOM, x + br, y + br * 2);
               text(cell.sprite.positions[BOTTOM], x + br, y + br * 2 - 15);
-
             }
             if (cell.sprite.positions[LEFT]) {
               text(LEFT, x, y + br);
@@ -91,6 +96,19 @@ function draw() {
             if (cell.sprite.userData.rotation) {
               text(cell.sprite.userData.rotation, x + br, y + br + 15);
             }
+          }
+        } else {
+          let x = i * board.resolution;
+          let y = j * board.resolution;
+          if (mouseX > x && mouseX < x + board.resolution && mouseY > y && mouseY < y + board.resolution) {
+            fill(255, 100);
+            rect(x, y, board.resolution, board.resolution);
+            fill(0);
+            stroke(255);
+            let br = board.resolution / 2;
+            textAlign(CENTER, CENTER);
+            text(`${i}, ${j}`, x + br, y + br);
+            text(`${rcount}`, x + br, y + br + 15);
           }
         }
       }

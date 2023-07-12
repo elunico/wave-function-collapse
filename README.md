@@ -17,7 +17,7 @@ The sketch can be adapted to use any set of tiles as follows:
   3.  A `images` key which contains many keys, each one being the name of an image file which contains a single tile. These image filename keys map to objects
       -  These objects must have 2 keys: a "classes" key and a "rotates" key.
           -  The "classes" key maps to an object with the keys "1", "2", "4", and "8" representing the top, right, bottom, and left side of the tile respectively. Each of these keys maps to a single letter string indicating which class that side of the tile is. Tiles can only be placed in spaces where all 4 of their sides match the class of the corresponding side of the tiles around them.
-          -  The "rotates" key maps to an array. This array can be empty if the tile cannot be rotated or can contain any number of degree measurements by which the tile can be rotated before placement.
+          -  The "rotates" key maps to an array. This array can be empty if the tile cannot be rotated or can contain 1 or more of the values `[90, 180, 270]` indicating the degree measurements by which the tile can be rotated before placement.
 
 You can find examples of these files in the sprites directory
 

@@ -2,6 +2,10 @@
 class Sprite {
 
   static rotate(image, edges, degrees) {
+    if (degrees % 90 != 0) {
+      throw new TypeError(`Can only rotate by a multiple of 90 degrees, not ${degrees}`);
+    }
+
     // rotate the image
     let graphics = createGraphics(image.width, image.height);
     graphics.background(0);
@@ -22,31 +26,31 @@ class Sprite {
     }
 
     return { image: graphics, edges };
-
   }
 
-  static addSprite(image, key, edges, userData) {
+  static createSprite(image, key, edges, userData) {
     let s = new Sprite(image, key, userData);
     for (let pos of Object.keys(edges)) {
       s.acceptsPosition(pos, edges[pos]);
     }
-    sprites.push(s);
+    return s;
   }
 
-  static loadSprites(directoryName) {
+  static loadSprites(directoryName, sprites) {
     let path = `sprites/${directoryName}`;
     loadJSON(`${path}/schema.json`, schema => {
-      console.log(schema);
       for (let key of Object.keys(schema.images)) {
         let edges = schema.images[key]['classes'];
         loadImage(`${path}/${key}`, image => {
           let rotations = schema.images[key].rotates;
           for (let degrees of rotations) {
             let result = Sprite.rotate(image, edges, degrees);
-            Sprite.addSprite(result.image, `${key}-r${degrees}`, result.edges, { rotation: degrees });
+            let s = Sprite.createSprite(result.image, `${key}-r${degrees}`, result.edges, { rotation: degrees });
+            sprites.push(s);
           }
           // sprite creation
-          Sprite.addSprite(image, key, edges);
+          let s = Sprite.createSprite(image, key, edges);
+          sprites.push(s);
         });
       }
     });
