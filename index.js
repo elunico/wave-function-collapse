@@ -24,7 +24,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  board = new Board(30);
+  board = new Board(50);
 
   withStroke = createCheckbox('Outlines?');
   debugging = createCheckbox('Debug?');
@@ -59,42 +59,61 @@ function draw() {
     for (let i = 0; i < board.columns; i++) {
       for (let j = 0; j < board.rows; j++) {
         let cell = board.grid[i][j];
-        let rcount = board.cache[Board.key(i, j)].count;
         let x = i * board.resolution;
         let y = j * board.resolution;
-        if (rcount == 0) {
-          fill(255, 0, 0, 75);
-          noStroke();
-          rect(x, y, board.resolution, board.resolution);
+        let rcount = 0;
+        if (board.cache[Board.key(i, j)]) {
+          if (board.cache[Board.key(i, j)] && board.cache[Board.key(i, j)].count == 0) {
+            fill(255, 0, 0, 150);
+            noStroke();
+            rect(x, y, board.resolution, board.resolution);
+          } else {
+            rcount = board.cache[Board.key(i, j)].count;
+          }
         }
         if (cell.sprite != -1 && cell.sprite) {
           if (mouseX > x && mouseX < x + board.resolution && mouseY > y && mouseY < y + board.resolution) {
-            fill(255, 100);
+            let xoff = 0, yoff = 0;
+            if (floor(mouseX / board.resolution) >= (board.columns - 1)) {
+              xoff = -2 * board.resolution / 3;
+            }
+            if (mouseX < board.resolution) {
+              xoff = 2 * board.resolution / 3;
+            }
+            if (mouseY < board.resolution * 2) {
+              yoff = board.resolution * 3;
+            }
+            fill(255, 150);
             rect(x, y, board.resolution, board.resolution);
+            let br = board.resolution / 2;
+            const offset = 15;
+            textAlign(CENTER, CENTER);
+            fill(255, 220, 200);
+            stroke(0);
+            rect(xoff + x - board.resolution / 2, yoff + y - board.resolution - br, board.resolution * 2, board.resolution);
             fill(0);
             stroke(255);
-            let br = board.resolution / 2;
-            textAlign(CENTER, CENTER);
-            text(cell.sprite.filename, x + br, y + br - 15);
-            text(`${i}, ${j}`, x + br, y + br);
+            text(cell.sprite.filename, xoff + x + board.resolution / 2, yoff + y - board.resolution - br / 2);
+            text(`${i}, ${j}`, xoff + x + br, yoff + y - board.resolution + br / 2);
+
             if (cell.sprite.positions[TOP]) {
               text(TOP, x + br, y);
-              text(cell.sprite.positions[TOP], x + br, y + 15);
+              text(cell.sprite.positions[TOP], x + br, y + offset);
             }
             if (cell.sprite.positions[BOTTOM]) {
               text(BOTTOM, x + br, y + br * 2);
-              text(cell.sprite.positions[BOTTOM], x + br, y + br * 2 - 15);
+              text(cell.sprite.positions[BOTTOM], x + br, y + br * 2 - offset);
             }
             if (cell.sprite.positions[LEFT]) {
               text(LEFT, x, y + br);
-              text(cell.sprite.positions[LEFT], x, y + br + 15);
+              text(cell.sprite.positions[LEFT], x, y + br + offset);
             }
             if (cell.sprite.positions[RIGHT]) {
               text(RIGHT, x + br * 2, y + br);
-              text(cell.sprite.positions[RIGHT], x + br * 2, y + br + 15);
+              text(cell.sprite.positions[RIGHT], x + br * 2, y + br + offset);
             }
             if (cell.sprite.userData.rotation) {
-              text(cell.sprite.userData.rotation, x + br, y + br + 15);
+              text(cell.sprite.userData.rotation, x + br, y + br + offset);
             }
           }
         } else {
