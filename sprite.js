@@ -39,7 +39,8 @@ class Sprite {
   static loadSprites(directoryName, sprites) {
     let path = `sprites/${directoryName}`;
     loadJSON(`${path}/schema.json`, schema => {
-      for (let key of Object.keys(schema.images)) {
+      let keys = Object.keys(schema.images);
+      for (let key of keys) {
         let edges = schema.images[key]['classes'];
         loadImage(`${path}/${key}`, image => {
           let rotations = schema.images[key].rotates;
