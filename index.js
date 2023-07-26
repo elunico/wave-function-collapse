@@ -14,6 +14,7 @@ function inversePosition(position) {
 }
 
 let sprites = [];
+let broken = false;
 let board;
 let withStroke;
 let debugging;
@@ -74,6 +75,8 @@ function draw() {
         let rcount = 0;
         if (board.cache[Board.key(i, j)]) {
           if (board.cache[Board.key(i, j)] && board.cache[Board.key(i, j)].count == 0) {
+            debugging.checked(true);
+            broken = true; 
             fill(255, 0, 0, 150);
             noStroke();
             rect(x, y, board.resolution, board.resolution);
@@ -154,5 +157,5 @@ function draw() {
     }
   }
 
-  for (let i = 0; i < floor(map(mouseX, 0, width, 1, 20)); i++)  board.step();
+  for (let i = 0; i < floor(map(mouseX, 0, width, 1, 20)) && !broken; i++)  board.step();
 }
