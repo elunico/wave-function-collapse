@@ -36,10 +36,11 @@ class Sprite {
     return s;
   }
 
-  static loadSprites(directoryName, sprites) {
+  static loadSprites(directoryName, sprites, onDone) {
     let path = `sprites/${directoryName}`;
     loadJSON(`${path}/schema.json`, schema => {
       let keys = Object.keys(schema.images);
+      let count = keys.length;
       for (let key of keys) {
         let edges = schema.images[key]['classes'];
         loadImage(`${path}/${key}`, image => {
@@ -52,8 +53,17 @@ class Sprite {
           // sprite creation
           let s = Sprite.createSprite(image, key, edges);
           sprites.push(s);
+          count--;
         });
       }
+      let checker = setInterval(() => {
+        if (count == 0) {
+          clearInterval(checker);
+          if (onDone) {
+            onDone();
+          }
+        }
+      }, 100);
     });
   }
 

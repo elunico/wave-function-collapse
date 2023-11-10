@@ -18,6 +18,9 @@ let broken = false;
 let board;
 let withStroke;
 let debugging;
+let spriteSetSelector;
+let changing = false;
+let tileSetName = 'advanced-maze';
 
 function keyPressed() {
   if (key == 's') {
@@ -28,21 +31,51 @@ function keyPressed() {
 }
 
 function preload() {
-  Sprite.loadSprites('advanced-maze', sprites);
+  let set = localStorage.getItem('wfc.eluni.co:tileset') || tileSetName;
+  Sprite.loadSprites(set, sprites);
+  tileSetName = set;
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  board = new Board(50);
+  board = new Board(100);
 
   withStroke = createCheckbox('Outlines?');
   debugging = createCheckbox('Debug?');
   if (window.location.host.includes('localhost') || window.location.host.includes('127.0.0.1')) {
     debugging.checked(true);
   }
+  spriteSetSelector = createSelect();
+  spriteSetSelector.option("advanced-maze");
+  spriteSetSelector.option("blue-magenta");
+  spriteSetSelector.option("boxes");
+  spriteSetSelector.option("circuit");
+  spriteSetSelector.option("maze");
+  spriteSetSelector.value(tileSetName);
+  spriteSetSelector.input(changeSprites);
+}
+
+function changeSprites() {
+  localStorage.setItem('wfc.eluni.co:tileset', spriteSetSelector.value());
+  broken = false;
+  debugging.checked(false);
+  withStroke.checked(false);
+  changing = true;
+  noLoop();
+  sprites = [];
+  board = new Board(board.resolution || 50);
+  Sprite.loadSprites(spriteSetSelector.value(), sprites, () => {
+    board.dirty = true;
+    console.log(sprites);
+    changing = false;
+    loop();
+  });
+  // console.log(sprites);
+  // loop();
 }
 
 function draw() {
+  // if (changing) return;
   background(51);
   // for (let i = 0; i < sprites.length; i++) {
   //   stroke(0);
@@ -76,7 +109,7 @@ function draw() {
         if (board.cache[Board.key(i, j)]) {
           if (board.cache[Board.key(i, j)] && board.cache[Board.key(i, j)].count == 0) {
             debugging.checked(true);
-            broken = true; 
+            broken = true;
             fill(255, 0, 0, 150);
             noStroke();
             rect(x, y, board.resolution, board.resolution);
@@ -156,6 +189,8 @@ function draw() {
       }
     }
   }
+  // noLoop();
 
-  for (let i = 0; i < floor(map(mouseX, 0, width, 1, 20)) && !broken; i++)  board.step();
+  if (!changing)
+    for (let i = 0; i < floor(map(mouseX, 0, width, 1, 20)) && !broken; i++)  board.step();
 }

@@ -24,6 +24,7 @@ class Board {
 
   _gatherOptions(i, j) {
     let options = [...sprites];
+    // console.log(options);
 
     // Look up, down, left, and right to find filled in tiles
     // eliminate tiles that do not match their neighbors
@@ -60,6 +61,7 @@ class Board {
 
   computeEntropy(i, j) {
     let { count } = this._gatherOptions(i, j);
+    // console.log(count);
     this.cache[Board.key(i, j)] = { count: count, i, j, cell: this.grid[i][j] };
     return count;
   }
