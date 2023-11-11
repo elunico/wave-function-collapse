@@ -1,0 +1,158 @@
+{
+  "global": {
+    "width": 14,
+    "height": 14,
+    "count": 14
+  },
+  "images": {
+    "bridge.png": {
+      "classes": {
+        "1": "A",
+        "2": "B",
+        "4": "A",
+        "8": "B"
+      },
+      "rotates": [
+        90
+      ]
+    },
+    "component.png": {
+      "classes": {
+        "1": "C",
+        "2": "C",
+        "4": "C",
+        "8": "C"
+      },
+      "rotates": []
+    },
+    "connection.png": {
+      "classes": {
+        "1": "A",
+        "2": "D",
+        "4": "C",
+        "8": "D"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "dskew.png": {
+      "classes": {
+        "1": "A",
+        "2": "A",
+        "4": "A",
+        "8": "A"
+      },
+      "rotates": []
+    },
+    "skew.png": {
+      "classes": {
+        "1": "A",
+        "2": "A",
+        "4": "D",
+        "8": "D"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "substrate.png": {
+      "classes": {
+        "1": "D",
+        "2": "D",
+        "4": "D",
+        "8": "D"
+      },
+      "rotates": []
+    },
+    "t.png": {
+      "classes": {
+        "1": "D",
+        "2": "A",
+        "4": "A",
+        "8": "A"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "track.png": {
+      "classes": {
+        "1": "A",
+        "2": "D",
+        "4": "A",
+        "8": "D"
+      },
+      "rotates": [
+        90
+      ]
+    },
+    "transition.png": {
+      "classes": {
+        "1": "B",
+        "2": "D",
+        "4": "A",
+        "8": "D"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "turn.png": {
+      "classes": {
+        "1": "A",
+        "2": "A",
+        "4": "D",
+        "8": "D"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "viad.png": {
+      "classes": {
+        "1": "D",
+        "2": "A",
+        "4": "D",
+        "8": "A"
+      },
+      "rotates": [
+        90
+      ]
+    },
+    "vias.png": {
+      "classes": {
+        "1": "A",
+        "2": "D",
+        "4": "D",
+        "8": "D"
+      },
+      "rotates": [
+        90,
+        180,
+        270
+      ]
+    },
+    "wire.png": {
+      "classes": {
+        "1": "D",
+        "2": "B",
+        "4": "D",
+        "8": "B"
+      },
+      "rotates": [
+        90
+      ]
+    }
+  }
+}
